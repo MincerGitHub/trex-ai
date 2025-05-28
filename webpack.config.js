@@ -42,7 +42,8 @@ module.exports = {
               limit: 0, // 禁用 Base64 转换，所有图片都输出为文件
               mimetype: 'image/png',
               name: 'images/[name].[ext]',
-              publicPath: '/trex-ai/assets', // 设置图片的公共路径
+              publicPath: '/trex-ai/assets/images', // 设置图片的公共路径
+              outputPath: 'images', // 设置图片的输出路径
             }
           }
         ]
