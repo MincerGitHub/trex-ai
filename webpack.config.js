@@ -4,7 +4,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 const ASSETS_SOURCE_PATH = path.resolve('./src');
 const ASSETS_BUILD_PATH = path.resolve('./assets');
-const ASSETS_PUBLIC_PATH = '/assets';
+const ASSETS_PUBLIC_PATH = '/trex-ai/assets';
 
 module.exports = {
   context: ASSETS_SOURCE_PATH,
@@ -49,13 +49,13 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({ // 使用修改后的导入方式
+    new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [ASSETS_BUILD_PATH],
       verbose: false
     }),
-    new ESLintPlugin({ // 使用 eslint-webpack-plugin
-      extensions: ['js', 'jsx'], // 检查的文件扩展名
-      exclude: ['node_modules', 'screen-capture'] // 排除的目录
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      exclude: ['node_modules', 'screen-capture']
     })
   ],
   optimization: {
