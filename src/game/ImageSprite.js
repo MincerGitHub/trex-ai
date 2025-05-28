@@ -1,3 +1,4 @@
+import offlineSprite from './images/offline-sprite.png';
 let _imageSprite = null;
 
 export function getImageSprite() {
@@ -7,7 +8,7 @@ export function getImageSprite() {
 export function loadImageSprite() {
   return new Promise((resolve) => {
     const imageSprite = document.createElement('img');
-    imageSprite.src = require('./images/offline-sprite.png');
+    imageSprite.src = offlineSprite
     imageSprite.addEventListener('load', () => {
       _imageSprite = imageSprite;
       resolve();
