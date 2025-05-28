@@ -39,7 +39,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192,
+              limit: 0,
               mimetype: 'image/png',
               name: 'images/[name].[ext]'
             }
