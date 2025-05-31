@@ -3,9 +3,9 @@ import 'babel-polyfill';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../game/constants';
 import { Runner } from '../game';
 import DQNModel from '../ai/models/dqn/DQNModel';
-import { tensor } from '../ai/utils';
 
-const T_REX_COUNT = 10;
+
+const T_REX_COUNT = 5;
 
 const epsilon = 1.0; // 初始探索率，在ε-greedy里用
 const epsilonDecay = 0.995; // 探索率衰减

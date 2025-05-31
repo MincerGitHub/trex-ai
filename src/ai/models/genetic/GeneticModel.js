@@ -2,21 +2,12 @@ import Model from '../Model';
 
 export default class GeneticModel extends Model {
   train(chromosomes) {
-<<<<<<< HEAD
     const parents = this.select(chromosomes);    // 选择最优染色体
     const offspring = this.crossOver(parents, chromosomes);    // 交叉
     this.mutate(offspring);    // 变异
   }
 
   fit(chromosomes) {    // 跟nn相比，重写了fit()，以适应遗传训练
-=======
-    const parents = this.select(chromosomes);
-    const offspring = this.crossOver(parents, chromosomes);
-    this.mutate(offspring);
-  }
-
-  fit(chromosomes) {
->>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
     this.train(chromosomes);
   }
 
@@ -30,21 +21,12 @@ export default class GeneticModel extends Model {
     const offspring1 = parents[0].slice();
     const offspring2 = parents[1].slice();
     // Select a random crossover point
-<<<<<<< HEAD
     const crossOverPoint = Math.floor(Math.random() * chromosomes.length);    // 使用 Math.random() 生成一个随机的交叉点（crossOverPoint），表示从染色体的前 crossOverPoint 个基因进行交换。
     // Swap values among parents
     for (let i = 0; i < crossOverPoint; i += 1) {
       const temp = offspring1[i];
       offspring1[i] = offspring2[i];
       offspring2[i] = temp;
-=======
-    const crossOverPoint = Math.floor(Math.random() * chromosomes.length);
-    // Swap values among parents
-    for (let i = 0; i < crossOverPoint; i += 1) {
-        const temp = offspring1[i];
-        offspring1[i] = offspring2[i];
-        offspring2[i] = temp;
->>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
     }
     const offspring = [offspring1, offspring2];
     // Replace the last 2 with the new offspring
@@ -56,11 +38,7 @@ export default class GeneticModel extends Model {
 
   mutate(chromosomes) {
     chromosomes.forEach(chromosome => {
-<<<<<<< HEAD
       const mutationPoint = Math.floor(Math.random() * chromosomes.length);    // 使用 Math.random() 随机选择一个基因位置（mutationPoint）作为变异点。
-=======
-      const mutationPoint = Math.floor(Math.random() * chromosomes.length);
->>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
       chromosome[mutationPoint] = Math.random();
     });
   }

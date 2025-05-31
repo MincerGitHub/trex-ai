@@ -12,11 +12,7 @@ export default class RandomModel extends Model {
     const inputX = inputXs[0];
     const y =
       this.weights[0] * inputX[0] +
-<<<<<<< HEAD
       this.weights[1] * inputX[1] +
-=======
-      this.weights[1] * inputX[1]+
->>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
       this.weights[2] * inputX[2] +
       this.biases[0];
     return y < 0 ? 1 : 0;
