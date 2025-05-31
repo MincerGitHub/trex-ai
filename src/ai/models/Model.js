@@ -23,12 +23,18 @@ export default class Model {
     );
   }
 
+<<<<<<< HEAD
   fit(inputXs, inputYs, iterationCount = 100) {    // 通过简单的循环调用 train 方法来进行多次训练迭代
     for (let i = 0; i < iterationCount; i += 1) {  // 进一步优化方案：1. 小批次训练 2. 早停机制
+=======
+  fit(inputXs, inputYs, iterationCount = 100) {
+    for (let i = 0; i < iterationCount; i += 1) {
+>>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
       this.train(inputXs, inputYs);
     }
   }
 
+<<<<<<< HEAD
   loss(predictedYs, labels) {                 // 鉴于是多分类问题，我把均方误差改成交叉熵损失了
     const epsilon = 1e-7; // 防止 log(0)
     const clippedPredictions = predictedYs.clipByValue(epsilon, 1 - epsilon); // 防止数值问题
@@ -38,5 +44,13 @@ export default class Model {
       .mean()
       .neg();
     return crossEntropy;
+=======
+  loss(predictedYs, labels) {
+    const meanSquareError = predictedYs
+      .sub(tensor(labels))
+      .square()
+      .mean();
+    return meanSquareError;
+>>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
   }
 }

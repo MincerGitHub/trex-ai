@@ -11,9 +11,15 @@ export default class NNModel extends Model {
   biases = [];
 
   constructor({
+<<<<<<< HEAD
     inputSize = 4,// 修改为 4，增加障碍物的高度
     hiddenLayerSize = inputSize * 2,
     outputSize = 3,// 修改为 3，支持不跳跃、跳跃和下蹲
+=======
+    inputSize = 3,
+    hiddenLayerSize = inputSize * 2,
+    outputSize = 2,
+>>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
     learningRate = 0.1
   } = {}) {
     super();
@@ -41,7 +47,11 @@ export default class NNModel extends Model {
     const x = tensor(inputXs);
     const prediction = tf.tidy(() => {
       const hiddenLayer = tf.sigmoid(x.matMul(this.weights[0]).add(this.biases[0]));
+<<<<<<< HEAD
       const outputLayer = tf.softmax(hiddenLayer.matMul(this.weights[1]).add(this.biases[1]));
+=======
+      const outputLayer = tf.sigmoid(hiddenLayer.matMul(this.weights[1]).add(this.biases[1]));
+>>>>>>> 98b9200e99926ed43a46d9494de8a0e830781ab6
       return outputLayer;
     });
     return prediction;
