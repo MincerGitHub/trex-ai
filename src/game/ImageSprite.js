@@ -1,3 +1,4 @@
+import bg from './images/bg.png';
 import offlineSprite from './images/offline-sprite.png';
 let _imageSprite = null;
 

@@ -159,7 +159,7 @@ function changeExp({ tRex, ifDone }) {
     const lastAction = tRex.training.lastAction;
     const reward = tRex.reward
 
-    // 计算 TD-Error 作为优先级
+    // 计算 TD-Error
     const qValues = dqnModel.predict(lastState).dataSync();
     const target = reward;
     const tdError = Math.abs(target - qValues[lastAction]) + rewardWeight * Math.abs(reward);    // 我在 TD-Error 计算里额外加入了 reward 的权重

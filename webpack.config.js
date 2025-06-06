@@ -126,7 +126,7 @@ module.exports = {
   },
   performance: {
     hints: false, // 禁用性能提示
-    maxAssetSize: 4096000, // 设置单个资源的最大大小（单位：字节）例如4Mb
+    maxAssetSize: 4096000, // 设置单个资源的最大大小（单位：字节）例4Mb
     maxEntrypointSize: 4096000, // 设置入口点的最大大小（单位：字节）
   },
 };
