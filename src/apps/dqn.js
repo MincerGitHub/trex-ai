@@ -18,11 +18,11 @@ const batchSize = 32; // 每次训练的批量大小
 
 const rewardWeight = 0.5; // 控制 reward 对优先级的影响程度
 
-const priorities = []; // 存储每条经验的优先级（跟经验池并列啦）
+const priorities = []; // 存储每条经验的优先级（跟经验池并列的）
 const alpha = 0.6; // 优先级影响因子
 
 let runner = null;
-const dqnModel = new DQNModel({ inputSize: 4, outputSize: 3 }); // 所有小恐龙共享同一个模型
+const dqnModel = new DQNModel({ inputSize: 4, outputSize: 3 });
 tRex.model.init();
 
 const training = {
@@ -76,18 +76,29 @@ function handleRunning({ tRex, state }) {
         // ε-greedy 策略选择动作，用于在强化学习中平衡 探索（exploration） 和 利用（exploitation），防止陷入局部最优
         let action;
         if (Math.random() < epsilon) {
-            action = Math.floor(Math.random() * 3); // 随机选择动作
+            action = Math.floor(Math.random() * 3);
         } else {
             const qValues = tRex.model.predict(stateVector).dataSync();
-            action = qValues.indexOf(Math.max(...qValues)); // 选择 Q 值最大的动作
+            action = qValues.indexOf(Math.max(...qValues));
         }
+
+        const reward = tRex.reward;
+        const nextStateVector = convertStateToVector(state.nextState);
+
+        const qValues = tRex.model.predict(stateVector).dataSync();
+        const nextQValues = tRex.model.predict(nextStateVector).dataSync();
+        const targetQ = reward + gamma * Math.max(...nextQValues);
+        qValues[action] = targetQ;
+
+        training.inputs.push(stateVector);
+        training.labels.push(qValues);
 
         changeExp({ tRex, ifDone: false });
 
         tRex.training.lastState = stateVector;
         tRex.training.lastAction = action;
 
-        resolve(action === 1 ? 1 : action === 2 ? -1 : 0); // 转换为游戏动作（遵循映射:2->-1, 1->1, 0->0）
+        resolve(action === 1 ? 1 : action === 2 ? -1 : 0); // 转换为游戏动作（遵循映射:2->-1, 1->1, 0->0；不顺眼着再改）
     });
 }
 
@@ -159,9 +170,12 @@ function changeExp({ tRex, ifDone }) {
     const lastAction = tRex.training.lastAction;
     const reward = tRex.reward
 
+    const nextState = tRex.training.nextState; // 记录下一状态
+
     // 计算 TD-Error
     const qValues = dqnModel.predict(lastState).dataSync();
-    const target = reward;
+    // const target = reward;
+    const target = reward + (ifDone ? 0 : gamma * Math.max(...dqnModel.predict(nextState).dataSync()));
     const tdError = Math.abs(target - qValues[lastAction]) + rewardWeight * Math.abs(reward);    // 我在 TD-Error 计算里额外加入了 reward 的权重
 
     // 存储经验和优先级

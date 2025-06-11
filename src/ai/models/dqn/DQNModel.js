@@ -23,7 +23,7 @@ export default class DQNModel extends Model {
     init() {
         this.optimizer = tf.train.adam(this.learningRate);
 
-        this.model = tf.sequential();
+        this.model = tf.sequential();  // 顺序模型
         this.model.add(tf.layers.dense({ units: this.hiddenLayerSize, inputShape: [this.inputSize], activation: 'relu' }));
         this.model.add(tf.layers.dense({ units: this.hiddenLayerSize, activation: 'relu' }));
         this.model.add(tf.layers.dense({ units: this.outputSize, activation: 'linear' })); // 输出 Q 值

@@ -80,21 +80,21 @@ export default class TrexGroup {        // TrexGroup 类的作用：用于管理
           // this.tRexes.forEach(async (tRex) => { ... }) 中的 async 确保每只小恐龙的逻辑是独立的。
           if (action === 1) {
             tRex.startJump();
-            tRex.reward -= 15;                           // 2. 跳跃的惩罚
+            tRex.reward -= 50;                           // 2. 跳跃的惩罚
           } else if (action === -1) {
             if (tRex.jumping) {
               tRex.setSpeedDrop();
               tRex.setDuck(true);
             } else if (!tRex.jumping && !tRex.ducking) {
               tRex.setDuck(true);
-              tRex.reward += 10;                         // ex. 下蹲甚至设置的是奖励而不是惩罚，破恐龙怎么还是不会蹲！？
+              tRex.reward += 50;                         // ex. 下蹲甚至设置的是奖励而不是惩罚，破龙怎么还是不会蹲
             }
           }
           tRex.reward += 1;                              // 3. 存活时间的奖励
         }
 
         if (obstacle.xPos + obstacle.width < tRex.xPos) {// 检查是否成功跳过障碍物
-          tRex.reward += 5;                              // 4. 成功跳过障碍物的奖励（（（ 以上四条是调参地狱QAQ（（（reward只对DQNModel生效，是我新加的
+          tRex.reward += 5;                              // 4. 成功跳过障碍物的奖励（（（ 地狱QAQ（（（reward只对DQNModel生效，是我新加的
         }
 
       } else {
@@ -105,4 +105,4 @@ export default class TrexGroup {        // TrexGroup 类的作用：用于管理
   }
 }
 
-function noop() { }
+function noop() { } // 空函数，用于默认的事件处理器

@@ -5,7 +5,6 @@
 1. 环境
 - node v20.19.1
 - npm 10.8.2
-建议用nvm管理node版本
 2. 
 ```bash
 npm install
@@ -27,7 +26,7 @@ npm start
 
 #### 盘源码逻辑
 
-从apps入手，细细捋模型和游戏代码
+从apps入手，模型和游戏代码
 
 #### 修改 NNModel（练手）
 
@@ -46,9 +45,7 @@ npm start
 
 ## 进一步的可能方案：
 
-1. 优化dqn.js：
-- 在changeExp()设置的是“nextState: null”，导致并没用到下一刻的状态，所以其实用的是伪TD方法
-- Q 值更新仅在 handleCrash 中进行，而不是在每个时间步（handleRunning）中实时更新
+1. 优化dqn.js
 2. 加个面板，监控模型的训练情况并做可视化（之前Mnist手写识别实验的那种）
 3. 在TrexGroup.js里调参：reward的影响因素
 4. 新建PPO、Dueling Q-Learning……别的类型的模型
